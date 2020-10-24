@@ -1,0 +1,21 @@
+version: 0.2
+
+env:
+  shell: bash
+
+phases:
+  pre_build:
+    commands:
+      - echo Entered the pre_build phase...
+      - npm install
+      - CI=true npm run test
+  build:
+    commands:
+      - echo Entered the build phase...
+      - echo Building the Website package...
+      - npm run build
+  post_build:
+    commands:
+      - echo Entered the post_build phase...
+      - echo Creating artifact...
+      - tar cfzv web-${MAJOR_VERSION}.${MINOR_VERSION}.`date +"%Y%m%d%H%M%S"`.tar.gz -C build
