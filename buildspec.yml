@@ -17,4 +17,5 @@ phases:
   post_build:
     commands:
       - echo Entered the post_build phase...
+      - echo $S3_BUCKET_NAME
       - aws s3 sync build/ s3://$S3_BUCKET_NAME
