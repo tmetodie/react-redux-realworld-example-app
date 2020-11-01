@@ -11,7 +11,7 @@ phases:
       - CI=true npm run test
       - |
         API_ROOT=`aws ssm get-parameter --name "/${AWS_DEFAULT_REGION}/${STAGE,,}/ApiGwEndpoint" --region "${AWS_DEFAULT_REGION}" --query 'Parameter.Value' --output text`
-        sed "s|https://conduit.productionready.io/api|$API_ROOT|g" src/agent.js
+        sed -i "s|https://conduit.productionready.io/api|$API_ROOT|g" src/agent.js
   build:
     commands:
       - echo Entered the build phase...
